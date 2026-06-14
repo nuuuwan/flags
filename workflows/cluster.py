@@ -1,7 +1,9 @@
 """
-Every flag in the world, grouped by colour similarity.
+June 14th is #FlagDay in the USA; the date when, in 1777, the first official US flag was adopted.
 
-Here's how it was made.
+Here's every flag in the world, grouped by colour similarity.
+
+THE ALGORITHM
 
 Each flag is first converted into a "colour fingerprint" — a long list of numbers
 describing its colours, pixel by pixel.
@@ -12,7 +14,10 @@ Each flag is then placed on a map using those two axes. Flags with similar colou
 
 The positions are slightly adjusted so that no two flags overlap.
 
-PS: June 14th is Flag Day in the USA — the date in 1777 when the first official US flag was adopted.
+...
+
+Wish flag is closest to your country's?
+
 """
 
 import os
@@ -25,18 +30,20 @@ from sklearn.decomposition import PCA
 
 FLAGS_DIR = os.path.join(os.path.dirname(__file__), "..", "images", "flags")
 ASPECT_RATIO = 16 / 9
-THUMB_HEIGHT = 15  # height of each flag thumbnail in pixels
+THUMB_HEIGHT = 28  # height of each flag thumbnail in pixels
 THUMB_WIDTH = round(
     THUMB_HEIGHT * ASPECT_RATIO
 )  # max width; flags scale to fit within both
-N_GRID_POSITIONS = 2000
+N_GRID_POSITIONS = 1000
 
-VECTOR_SIZE = (16, 9)
 OUTPUT_PATH = os.path.join(
     os.path.dirname(__file__), "..", "images", "output", "cluster.png"
 )
 FIG_W = 24
 FIG_SIZE = (FIG_W, round(FIG_W / ASPECT_RATIO, 1))
+
+
+VECTOR_SIZE = (16, 9)
 
 
 def build_vector(img_path: str) -> np.ndarray:
